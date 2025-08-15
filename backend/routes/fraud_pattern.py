@@ -6,10 +6,12 @@ import os
 import logging
 import json
 from bson import ObjectId, json_util
+from dotenv import load_dotenv
 
 from models.fraud_pattern import FraudPatternModel, FraudPatternResponse
 from db.mongo_db import MongoDBAccess
-from bedrock.embeddings import get_embedding
+# from bedrock.embeddings import get_embedding
+from azure_foundry.embeddings import get_embedding
 
 # Custom JSON encoder for MongoDB ObjectId
 class MongoJSONEncoder(json.JSONEncoder):
@@ -21,9 +23,11 @@ class MongoJSONEncoder(json.JSONEncoder):
 # Set up logging
 logger = logging.getLogger(__name__)
 
+load_dotenv()
+
 # Environment variables
 MONGODB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017")
-DB_NAME = os.getenv("DB_NAME", "fsi-threatsight360")
+DB_NAME = os.getenv("DB_NAME", "threatsight360")
 PATTERN_COLLECTION = "fraud_patterns"
 
 router = APIRouter(
@@ -90,7 +94,8 @@ async def create_fraud_pattern(pattern: FraudPatternModel = Body(...), db: Mongo
                 created_pattern[key] = str(value)
             elif key == "vector_embedding" and isinstance(value, list) and len(value) > 10:
                 # Truncate the embedding for display purposes
-                created_pattern[key] = value[:10] + ["..."]
+                created_pattern["embedding_preview"] = value[:10]
+                # created_pattern[key] = value[:10] + ["..."]
             else:
                 created_pattern[key] = value
     else:
