@@ -9,7 +9,7 @@ from db.mongo_db import MongoDBAccess
 
 # Environment variables
 MONGODB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017")
-DB_NAME = os.getenv("DB_NAME", "fsi-threatsight360")
+DB_NAME = os.getenv("DB_NAME", "threatsight360")
 CUSTOMER_COLLECTION = "customers"
 
 router = APIRouter(

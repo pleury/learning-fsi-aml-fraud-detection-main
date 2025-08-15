@@ -1224,9 +1224,10 @@ const ModelAdminPanel = () => {
 
           {/* Model Selection */}
           <div style={{ marginBottom: spacing[4] }}>
-            <Label htmlFor="model-select">Select Risk Model</Label>
+            <Label htmlFor="model-select" id="model-select-label">Select Risk Model</Label>
             <Select
               id="model-select"
+              aria-labelledby="model-select-label"
               onChange={(value) => {
                 console.log('Model selected:', value);
 

@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import List, Optional
+from typing import List, Optional, Union
 from bson import ObjectId
 
 
@@ -45,7 +45,7 @@ class FraudPatternResponse(BaseModel):
     false_positive_rate: float
     # Note: vector_embedding may be excluded for API responses to reduce payload size
     # We've included it here for completeness
-    vector_embedding: List[float]
+    vector_embedding: Optional[List[Union[float, str]]] = None
 
     model_config = {
         "populate_by_name": True,

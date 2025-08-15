@@ -17,7 +17,9 @@ from bson import ObjectId
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from bedrock.embeddings import get_embedding
+# from bedrock.embeddings import get_embedding
+from azure_foundry.embeddings import get_embedding
+
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -28,7 +30,7 @@ load_dotenv()
 
 # MongoDB connection settings
 MONGODB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017")
-DB_NAME = os.getenv("DB_NAME", "fsi-threatsight360")
+DB_NAME = os.getenv("DB_NAME", "threatsight360")
 
 # Collection names
 CUSTOMER_COLLECTION = "customers"

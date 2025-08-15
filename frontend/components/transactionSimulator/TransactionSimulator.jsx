@@ -1225,7 +1225,7 @@ function TransactionSimulator() {
           <div className={styles.formRow}>
             {/* Amount */}
             <div className={styles.formField}>
-              <Label htmlFor="amount" style={{ 
+              <Label htmlFor="amount" id="amount-label" style={{ 
                 display: 'block', 
                 marginBottom: spacing[1],
                 color: palette.gray.dark2,
@@ -1237,6 +1237,7 @@ function TransactionSimulator() {
                 <div style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', zIndex: 0 }}>$</div>
                 <TextInput
                   id="amount"
+                  aria-labelledby="amount-label"
                   onChange={e => setAmount(parseFloat(e.target.value) || 0)}
                   value={amount.toString()}
                   type={TextInputType.Number}

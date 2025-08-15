@@ -5,17 +5,20 @@ from typing import List, Optional, Dict, Any
 import os
 import logging
 from datetime import datetime, timedelta
-
+from dotenv import load_dotenv
 from models.transaction import TransactionModel, TransactionResponse
 from db.mongo_db import MongoDBAccess
 from services.fraud_detection import FraudDetectionService
 
 # Set up logging
+
 logger = logging.getLogger(__name__)
+
+load_dotenv()
 
 # Environment variables
 MONGODB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017")
-DB_NAME = os.getenv("DB_NAME", "fsi-threatsight360")
+DB_NAME = os.getenv("DB_NAME", "threatsight360")
 TRANSACTION_COLLECTION = "transactions"
 
 router = APIRouter(
